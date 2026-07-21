@@ -77,7 +77,7 @@ export default function App() {
       <PageMetadata />
       <div className="min-h-screen flex flex-col bg-brand-dark">
         <Navbar />
-        <main className="flex-1">
+        <main id="main-content" className="flex-1">
           <Routes>
             {publicPages.map(({ path }) => (
               <Route key={path} path={path} element={pageComponents[path]} />

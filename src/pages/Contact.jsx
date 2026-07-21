@@ -80,7 +80,7 @@ export default function Contact() {
             <div className="lg:col-span-2 space-y-8">
               {/* Contact info */}
               <div className="bg-brand-card border-glow rounded-2xl p-8">
-                <h3 className="font-display font-bold text-white text-xl mb-6">Contact Information</h3>
+                <h2 className="font-display font-bold text-white text-xl mb-6">Contact Information</h2>
                 <ul className="space-y-5">
                   <li className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-lg bg-purple-900/40 border border-purple-800/40 flex items-center justify-center text-purple-400 flex-shrink-0">
@@ -123,7 +123,7 @@ export default function Contact() {
 
               {/* What to expect */}
               <div className="bg-brand-card border-glow rounded-2xl p-8">
-                <h3 className="font-display font-bold text-white text-lg mb-5">What Happens Next?</h3>
+                <h2 className="font-display font-bold text-white text-lg mb-5">What Happens Next?</h2>
                 <ul className="space-y-4">
                   {[
                     'We review your submission within 24 hours',
@@ -145,7 +145,7 @@ export default function Contact() {
             {/* Form */}
             <div className="lg:col-span-3">
               <div className="bg-brand-card border-glow rounded-2xl p-8 md:p-10">
-                <h3 className="font-display font-bold text-white text-2xl mb-2">Send Us a Message</h3>
+                <h2 className="font-display font-bold text-white text-2xl mb-2">Send Us a Message</h2>
                 <p className="text-gray-500 text-sm mb-8">Fill in your details and we'll get back to you within one business day.</p>
 
                 {status === 'success' ? (
@@ -153,7 +153,7 @@ export default function Contact() {
                     <div className="w-16 h-16 rounded-full bg-purple-900/50 border border-purple-600 flex items-center justify-center mx-auto mb-5">
                       <svg className="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
-                    <h4 className="font-display font-bold text-white text-xl mb-2">Message Received!</h4>
+                    <h3 className="font-display font-bold text-white text-xl mb-2">Message Received!</h3>
                     <p className="text-gray-400 text-sm">We'll be in touch within 24 hours to schedule your free strategy call.</p>
                   </div>
                 ) : (

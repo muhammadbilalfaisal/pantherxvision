@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { beforeEach, describe, expect, it } from 'vitest'
 import App from './App'
+import { publicPages } from './config/seo'
 
 describe('application routing', () => {
   beforeEach(() => {
@@ -22,5 +23,14 @@ describe('application routing', () => {
     expect(screen.getByRole('link', { name: /return home/i })).toHaveAttribute('href', '/')
     expect(document.querySelector('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow')
     expect(document.querySelector('link[rel="canonical"]')).not.toBeInTheDocument()
+  })
+
+  it.each(publicPages)('sets complete metadata for $path', ({ path, title, description }) => {
+    window.history.pushState({}, '', path)
+    render(<App />)
+    expect(document.title).toBe(title)
+    expect(document.querySelector('meta[name="description"]')).toHaveAttribute('content', description)
+    expect(document.querySelector('meta[property="og:title"]')).toHaveAttribute('content', title)
+    expect(document.querySelector('meta[name="twitter:title"]')).toHaveAttribute('content', title)
   })
 })

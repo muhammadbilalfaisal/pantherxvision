@@ -45,7 +45,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display font-semibold text-white mb-5 text-sm uppercase tracking-widest">Quick Links</h4>
+            <h2 className="font-display font-semibold text-white mb-5 text-sm uppercase tracking-widest">Quick Links</h2>
             <ul className="space-y-3">
               {links.map(({ to, label }) => (
                 <li key={to}>
@@ -59,7 +59,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="font-display font-semibold text-white mb-5 text-sm uppercase tracking-widest">Services</h4>
+            <h2 className="font-display font-semibold text-white mb-5 text-sm uppercase tracking-widest">Services</h2>
             <ul className="space-y-3">
               {services.map(s => (
                 <li key={s}>
@@ -73,7 +73,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-display font-semibold text-white mb-5 text-sm uppercase tracking-widest">Contact</h4>
+            <h2 className="font-display font-semibold text-white mb-5 text-sm uppercase tracking-widest">Contact</h2>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <svg className="w-4 h-4 text-purple-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -96,10 +96,10 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-brand-border mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-400 text-sm">
             © {new Date().getFullYear()} Panther X Vision. All rights reserved.
           </p>
-          <p className="text-gray-600 text-xs">
+          <p className="text-gray-400 text-xs">
             Strategy • Branding • Marketing • Growth
           </p>
         </div>

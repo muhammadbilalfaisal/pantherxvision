@@ -19,6 +19,28 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', sans-serif;
   }
+  :focus-visible {
+    outline: 2px solid #C084FC;
+    outline-offset: 3px;
+  }
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  background: #ffffff;
+  color: #0D0D14;
+  font-weight: 600;
+  transform: translateY(-150%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }
 
 @layer utilities {

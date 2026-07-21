@@ -134,7 +134,7 @@ export default function Home() {
               {stats.map(({ number, label }) => (
                 <div key={label}>
                   <div className="font-display font-bold text-3xl text-gradient-purple">{number}</div>
-                  <div className="text-gray-500 text-sm mt-1">{label}</div>
+                  <div className="text-gray-400 text-sm mt-1">{label}</div>
                 </div>
               ))}
             </div>
@@ -226,7 +226,7 @@ export default function Home() {
                   ].map(({ label, value }) => (
                     <div key={label} className="bg-brand-dark/60 rounded-xl p-5 border border-brand-border">
                       <div className="font-display font-bold text-2xl text-gradient-purple">{value}</div>
-                      <div className="text-gray-500 text-xs mt-1 leading-tight">{label}</div>
+                      <div className="text-gray-400 text-xs mt-1 leading-tight">{label}</div>
                     </div>
                   ))}
                 </div>
@@ -239,8 +239,8 @@ export default function Home() {
                     <div className="bg-gradient-to-r from-purple-700 to-purple-400 h-2 rounded-full" style={{ width: '78%' }} />
                   </div>
                   <div className="flex justify-between mt-1">
-                    <span className="text-gray-600 text-xs">Before PXV</span>
-                    <span className="text-gray-600 text-xs">After PXV</span>
+                    <span className="text-gray-400 text-xs">Before PXV</span>
+                    <span className="text-gray-400 text-xs">After PXV</span>
                   </div>
                 </div>
               </div>
@@ -262,7 +262,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {process.map(({ step, desc }, i) => (
               <div key={step} className="relative bg-brand-card border-glow rounded-xl p-7 card-hover">
-                <div className="font-display font-bold text-5xl text-purple-900/60 mb-4 leading-none">
+                <div className="font-display font-bold text-5xl text-purple-500 mb-4 leading-none">
                   0{i + 1}
                 </div>
                 <h3 className="font-display font-bold text-white text-xl mb-3">{step}</h3>
@@ -289,7 +289,7 @@ export default function Home() {
             <div className="w-10 h-10 rounded-full bg-purple-800 flex items-center justify-center font-display font-bold text-white">A</div>
             <div className="text-left">
               <div className="text-white font-semibold text-sm">Ahmed Raza</div>
-              <div className="text-gray-500 text-xs">CEO, TechBridge Solutions, Karachi</div>
+              <div className="text-gray-400 text-xs">CEO, TechBridge Solutions, Karachi</div>
             </div>
           </div>
         </div>
