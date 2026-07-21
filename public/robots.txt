@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://pantherxvision.com/sitemap.xml

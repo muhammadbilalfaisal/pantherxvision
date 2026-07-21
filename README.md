@@ -45,7 +45,6 @@ Create `.env.local` from `.env.example` and configure:
 | Variable | Required | Description |
 | --- | --- | --- |
 | `VITE_FORMSPREE_ENDPOINT` | Yes for form submissions | Full Formspree endpoint, such as `https://formspree.io/f/xabcdefg` |
-| `VITE_SITE_URL` | Recommended in production | Public site origin used for canonical URLs, without a trailing slash |
 
 Vite exposes `VITE_` variables to browser code. Do not place secrets in them. A Formspree form endpoint is a public client-side identifier, not an API secret.
 
@@ -55,6 +54,7 @@ Vite exposes `VITE_` variables to browser code. Do not place secrets in them. A 
 | --- | --- |
 | `npm run dev` | Start the Vite development server |
 | `npm run build` | Create the production build in `dist/` |
+| `npm run generate:sitemap` | Generate `public/sitemap.xml` from the public route configuration |
 | `npm run preview` | Preview the production build locally |
 | `npm run lint` | Run ESLint across the source and tests |
 | `npm test` | Run the test suite once |
@@ -68,9 +68,11 @@ public/                 Static brand assets
 src/
   components/           Shared navigation, footer, and headings
   pages/                Route-level page components
+  config/seo.js         Public routes and route-specific SEO metadata
   App.jsx               Routing and page metadata
   index.css             Tailwind layers and global styles
 netlify.toml            Netlify build and SPA fallback rules
+scripts/                 Build-time sitemap generation
 ```
 
 ## Contact form setup
@@ -90,7 +92,7 @@ To deploy through GitHub:
 
 1. Push the repository to GitHub.
 2. Import it into [Netlify](https://www.netlify.com/).
-3. Configure the environment variables above.
+3. Configure the Formspree environment variable above.
 4. Deploy. Netlify will use the committed build configuration automatically.
 
 Before publishing, replace this paragraph with the live site URL and add a project screenshot or social-sharing image.
@@ -101,7 +103,7 @@ Before publishing, replace this paragraph with the live site URL and add a proje
 - Team profiles: the `team` array in `src/pages/About.jsx`
 - Brand colors and fonts: `tailwind.config.js`
 - Logo and favicon: `public/logo.svg` and `public/favicon.svg`
-- Route metadata: `pageMetadata` in `src/App.jsx`
+- Routes and SEO metadata: `src/config/seo.js` (the sitemap is generated from this list)
 
 ## Troubleshooting
 

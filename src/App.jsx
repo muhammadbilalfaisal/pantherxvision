@@ -7,24 +7,13 @@ import About from './pages/About'
 import Services from './pages/Services'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
+import { pageMetadata, publicPages, SITE_URL } from './config/seo'
 
-const pageMetadata = {
-  '/': {
-    title: 'Panther X Vision | Digital Marketing Agency in Karachi',
-    description: 'Growth-driven digital marketing, SEO, paid advertising, branding, and web design for ambitious businesses in Karachi and beyond.',
-  },
-  '/about': {
-    title: 'About Us | Panther X Vision',
-    description: 'Meet Panther X Vision, a Karachi digital marketing agency built around bold strategy, transparent reporting, and measurable growth.',
-  },
-  '/services': {
-    title: 'Digital Marketing Services | Panther X Vision',
-    description: 'Explore social media marketing, SEO, PPC, content, brand strategy, and web design services from Panther X Vision.',
-  },
-  '/contact': {
-    title: 'Contact Panther X Vision | Book a Strategy Call',
-    description: 'Contact Panther X Vision to book a free digital growth strategy call for your business.',
-  },
+const pageComponents = {
+  '/': <Home />,
+  '/about': <About />,
+  '/services': <Services />,
+  '/contact': <Contact />,
 }
 
 function updateMeta(name, content, attribute = 'name') {
@@ -41,18 +30,23 @@ function PageMetadata() {
   const { pathname } = useLocation()
 
   useEffect(() => {
+    const isPublicPage = Boolean(pageMetadata[pathname])
     const metadata = pageMetadata[pathname] ?? {
       title: 'Page Not Found | Panther X Vision',
       description: 'The requested Panther X Vision page could not be found.',
     }
-    const siteUrl = (import.meta.env.VITE_SITE_URL || window.location.origin).replace(/\/$/, '')
-    const canonicalUrl = `${siteUrl}${pathname === '/' ? '' : pathname}`
+    const canonicalUrl = `${SITE_URL}${pathname === '/' ? '' : pathname}`
 
     document.title = metadata.title
     updateMeta('description', metadata.description)
+    updateMeta('robots', isPublicPage ? 'index, follow' : 'noindex, nofollow')
     updateMeta('og:title', metadata.title, 'property')
     updateMeta('og:description', metadata.description, 'property')
     updateMeta('og:url', canonicalUrl, 'property')
+    updateMeta('og:type', 'website', 'property')
+    updateMeta('twitter:card', 'summary')
+    updateMeta('twitter:title', metadata.title)
+    updateMeta('twitter:description', metadata.description)
 
     let canonical = document.head.querySelector('link[rel="canonical"]')
     if (!canonical) {
@@ -60,7 +54,11 @@ function PageMetadata() {
       canonical.setAttribute('rel', 'canonical')
       document.head.appendChild(canonical)
     }
-    canonical.setAttribute('href', canonicalUrl)
+    if (isPublicPage) {
+      canonical.setAttribute('href', canonicalUrl)
+    } else {
+      canonical.remove()
+    }
   }, [pathname])
 
   return null
@@ -81,10 +79,9 @@ export default function App() {
         <Navbar />
         <main className="flex-1">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<Contact />} />
+            {publicPages.map(({ path }) => (
+              <Route key={path} path={path} element={pageComponents[path]} />
+            ))}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
