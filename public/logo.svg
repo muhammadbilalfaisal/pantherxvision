@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100" fill="none">
+  <defs>
+    <linearGradient id="xGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#9B4DCA"/>
+      <stop offset="100%" stop-color="#6B21A8"/>
+    </linearGradient>
+    <linearGradient id="slashGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7B2FBE"/>
+      <stop offset="100%" stop-color="#4C1D95"/>
+    </linearGradient>
+  </defs>
+  <!-- X left stroke -->
+  <polygon points="8,8 28,8 55,46 28,84 8,84 38,46" fill="url(#xGrad)"/>
+  <!-- X right stroke -->
+  <polygon points="72,8 52,8 38,46 52,84 72,84 52,46" fill="url(#xGrad)" opacity="0.85"/>
+  <!-- Purple slash accent -->
+  <polygon points="56,8 64,8 48,84 40,84" fill="url(#slashGrad)" opacity="0.9"/>
+  <!-- PANTHER text -->
+  <text x="90" y="48" font-family="Space Grotesk, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" letter-spacing="3">PANTHER</text>
+  <!-- X VISION text -->
+  <text x="90" y="72" font-family="Space Grotesk, sans-serif" font-size="22" font-weight="700" fill="#9B4DCA" letter-spacing="3">X VISION</text>
+  <!-- tagline -->
+  <text x="91" y="88" font-family="Inter, sans-serif" font-size="7" font-weight="400" fill="#6B7280" letter-spacing="2.5">STRATEGY • BRANDING • MARKETING • GROWTH</text>
+</svg>
