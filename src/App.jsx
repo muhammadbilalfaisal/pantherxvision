@@ -44,9 +44,13 @@ function PageMetadata() {
     updateMeta('og:description', metadata.description, 'property')
     updateMeta('og:url', canonicalUrl, 'property')
     updateMeta('og:type', 'website', 'property')
-    updateMeta('twitter:card', 'summary')
+    updateMeta('og:image', `${SITE_URL}/og-image.png`, 'property')
+    updateMeta('og:image:alt', 'Panther X Vision logo', 'property')
+    updateMeta('twitter:card', 'summary_large_image')
     updateMeta('twitter:title', metadata.title)
     updateMeta('twitter:description', metadata.description)
+    updateMeta('twitter:image', `${SITE_URL}/og-image.png`)
+    updateMeta('twitter:image:alt', 'Panther X Vision logo')
 
     let canonical = document.head.querySelector('link[rel="canonical"]')
     if (!canonical) {

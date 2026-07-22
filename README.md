@@ -102,7 +102,7 @@ Before publishing, replace this paragraph with the live site URL and add a proje
 - Contact details and social links: `src/components/Footer.jsx` and `src/pages/Contact.jsx`
 - Team profiles: the `team` array in `src/pages/About.jsx`
 - Brand colors and fonts: `tailwind.config.js`
-- Logo and favicon: `public/logo.svg` and `public/favicon.svg`
+- Logo and favicons: `public/logo.png`, `public/favicon.ico`, and the PNG icon variants in `public/`
 - Routes and SEO metadata: `src/config/seo.js` (the sitemap is generated from this list)
 
 ## Troubleshooting

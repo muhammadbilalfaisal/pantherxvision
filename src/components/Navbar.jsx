@@ -38,7 +38,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
-            <img src="/logo.svg" alt="Panther X Vision" className="h-10 w-auto" />
+            <img src="/logo.png" alt="Panther X Vision" className="h-14 w-auto" width="1000" height="500" />
           </Link>
 
           {/* Desktop nav */}

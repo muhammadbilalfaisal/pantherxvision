@@ -23,7 +23,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <img src="/logo.svg" alt="Panther X Vision" className="h-10 w-auto mb-4" />
+            <img src="/logo.png" alt="Panther X Vision" className="h-16 w-auto mb-4" width="1000" height="500" loading="lazy" />
             <p className="text-gray-400 text-sm leading-relaxed mt-4">
               A growth-driven digital marketing agency helping businesses dominate their market through bold strategy and measurable results.
             </p>
