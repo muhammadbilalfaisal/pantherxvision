@@ -22,29 +22,48 @@ export default function Contact() {
     name: '', email: '', phone: '', company: '', service: '', budget: '', message: '',
   })
   const [status, setStatus] = useState('idle') // idle | sending | success | error
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = e => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
 
   const handleSubmit = async e => {
     e.preventDefault()
     setStatus('sending')
+    setErrorMessage('')
     try {
       const endpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT
       if (!endpoint) {
         throw new Error('VITE_FORMSPREE_ENDPOINT is not configured')
       }
+      const payload = new FormData()
+      Object.entries(form).forEach(([key, value]) => payload.append(key, value))
       const res = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(form),
+        headers: { Accept: 'application/json' },
+        body: payload,
       })
       if (res.ok) {
         setStatus('success')
         setForm({ name: '', email: '', phone: '', company: '', service: '', budget: '', message: '' })
       } else {
+        const data = await res.json().catch(() => null)
+        const formspreeMessage = data?.errors
+          ?.map(error => error.message)
+          .filter(Boolean)
+          .join(' ')
+        setErrorMessage(
+          res.status === 429
+            ? 'Too many attempts. Please wait a few minutes and try again.'
+            : formspreeMessage || data?.error || 'Formspree rejected the submission. Please verify the form in your Formspree dashboard.',
+        )
         setStatus('error')
       }
-    } catch {
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error && error.message.includes('VITE_FORMSPREE_ENDPOINT')
+          ? 'The contact form is not configured on this deployment.'
+          : 'Unable to reach Formspree. Please check your connection and try again.',
+      )
       setStatus('error')
     }
   }
@@ -203,7 +222,10 @@ export default function Contact() {
                         className={inputCls + ' resize-none'} />
                     </div>
                     {status === 'error' && (
-                      <p className="text-red-400 text-sm" role="alert">Something went wrong. Please try again or email us directly.</p>
+                      <p className="text-red-400 text-sm" role="alert">
+                        {errorMessage} You can also email us directly at{' '}
+                        <a className="underline hover:text-red-300" href="mailto:info@pantherxvision.com">info@pantherxvision.com</a>.
+                      </p>
                     )}
                     <button type="submit" disabled={status === 'sending'}
                       className="btn-primary w-full text-center text-base disabled:opacity-60">
