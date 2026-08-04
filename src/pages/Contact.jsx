@@ -116,7 +116,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <div className="text-xs text-gray-500 uppercase tracking-wider font-display mb-1">Email</div>
-                      <a href="mailto:info@pantherxvision.com" className="text-white text-sm hover:text-purple-400 transition-colors">info@pantherxvision.com</a>
+                      <a href="mailto:pantherxvision786@gmail.com" className="text-white text-sm hover:text-purple-400 transition-colors">pantherxvision786@gmail.com</a>
                     </div>
                   </li>
                   <li className="flex items-start gap-4">
@@ -224,7 +224,7 @@ export default function Contact() {
                     {status === 'error' && (
                       <p className="text-red-400 text-sm" role="alert">
                         {errorMessage} You can also email us directly at{' '}
-                        <a className="underline hover:text-red-300" href="mailto:info@pantherxvision.com">info@pantherxvision.com</a>.
+                        <a className="underline hover:text-red-300" href="mailto:pantherxvision786@gmail.com">pantherxvision786@gmail.com</a>.
                       </p>
                     )}
                     <button type="submit" disabled={status === 'sending'}
