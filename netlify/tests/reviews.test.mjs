@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { handler } from './reviews.mjs'
+import { handler } from '../functions/reviews.mjs'
 
 describe('reviews Netlify function', () => {
   beforeEach(() => {
