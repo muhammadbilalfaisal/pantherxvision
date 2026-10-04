@@ -19,4 +19,10 @@ export default [
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     },
   },
+  {
+    files: ['netlify/functions/**/*.mjs', 'scripts/**/*.mjs'],
+    languageOptions: {
+      globals: { ...globals.node, fetch: 'readonly' },
+    },
+  },
 ]

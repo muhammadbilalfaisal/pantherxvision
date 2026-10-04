@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import SectionHeading from '../components/SectionHeading'
+import ReviewSection from '../components/reviews/ReviewSection'
 
 const services = [
   {
@@ -249,6 +250,8 @@ export default function Home() {
         </div>
       </section>
 
+      <ReviewSection />
+
       {/* PROCESS */}
       <section className="py-24 relative overflow-hidden">
         <div className="glow-blob w-[500px] h-[300px] bg-purple-900/15 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
@@ -272,25 +275,6 @@ export default function Home() {
                 )}
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIAL */}
-      <section className="py-24 bg-brand-card/40 border-y border-brand-border">
-        <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-purple-400 mb-8 font-display">
-            Client Results
-          </span>
-          <blockquote className="font-display font-medium text-2xl md:text-3xl text-white leading-relaxed mb-8">
-            "Panther X Vision completely transformed how we approach digital. Our social media engagement tripled in 90 days and we saw a 2.4x return on ad spend within the first month."
-          </blockquote>
-          <div className="flex items-center justify-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-purple-800 flex items-center justify-center font-display font-bold text-white">A</div>
-            <div className="text-left">
-              <div className="text-white font-semibold text-sm">Ahmed Raza</div>
-              <div className="text-gray-400 text-xs">CEO, TechBridge Solutions, Karachi</div>
-            </div>
           </div>
         </div>
       </section>
