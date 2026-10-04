@@ -25,6 +25,13 @@ describe('application routing', () => {
     expect(document.querySelector('link[rel="canonical"]')).not.toBeInTheDocument()
   })
 
+  it('includes Performance Marketing in the services offering', () => {
+    window.history.pushState({}, '', '/services')
+    render(<App />)
+    expect(screen.getByRole('heading', { level: 2, name: 'Performance Marketing' })).toBeInTheDocument()
+    expect(screen.getByText('ROAS & ROI optimization')).toBeInTheDocument()
+  })
+
   it.each(publicPages)('sets complete metadata for $path', ({ path, title, description }) => {
     window.history.pushState({}, '', path)
     render(<App />)

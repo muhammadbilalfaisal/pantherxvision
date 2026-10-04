@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -8,6 +9,8 @@ import Services from './pages/Services'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 import { pageMetadata, publicPages, SITE_URL } from './config/seo'
+import MotionProvider from './components/motion/MotionProvider'
+import PageTransition from './components/motion/PageTransition'
 
 const pageComponents = {
   '/': <Home />,
@@ -74,23 +77,35 @@ function ScrollToTop() {
   return null
 }
 
+function AnimatedRoutes() {
+  const location = useLocation()
+
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <Routes location={location} key={location.pathname}>
+        {publicPages.map(({ path }) => (
+          <Route key={path} path={path} element={<PageTransition>{pageComponents[path]}</PageTransition>} />
+        ))}
+        <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+      </Routes>
+    </AnimatePresence>
+  )
+}
+
 export default function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <PageMetadata />
-      <div className="min-h-screen flex flex-col bg-brand-dark">
-        <Navbar />
-        <main id="main-content" className="flex-1">
-          <Routes>
-            {publicPages.map(({ path }) => (
-              <Route key={path} path={path} element={pageComponents[path]} />
-            ))}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
+    <MotionProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <PageMetadata />
+        <div className="min-h-screen flex flex-col bg-brand-dark">
+          <Navbar />
+          <main id="main-content" className="flex-1">
+            <AnimatedRoutes />
+          </main>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </MotionProvider>
   )
 }

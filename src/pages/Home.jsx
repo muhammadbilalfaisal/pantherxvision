@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import SectionHeading from '../components/SectionHeading'
 import ReviewSection from '../components/reviews/ReviewSection'
+import Reveal from '../components/motion/Reveal'
+import { StaggerGroup, StaggerItem } from '../components/motion/Stagger'
 
 const services = [
   {
@@ -30,6 +32,15 @@ const services = [
     ),
     title: 'Pay-Per-Click Advertising',
     desc: 'Maximize ROI with precisely targeted Google and Meta ad campaigns. We manage every rupee to ensure you get the highest returns on your ad spend.',
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+        <path d="M3 20V4"/><path d="M3 20h18"/><path d="M7 15l4-4 3 3 6-8"/><path d="M16 6h4v4"/>
+      </svg>
+    ),
+    title: 'Performance Marketing',
+    desc: 'Data-driven campaigns that generate qualified leads, improve conversions, and turn your advertising budget into measurable, scalable growth.',
   },
   {
     icon: (
@@ -90,6 +101,7 @@ const marqueeItems = [
   'Social Media Marketing',
   'SEO',
   'PPC Advertising',
+  'Performance Marketing',
   'Brand Strategy',
   'Content Marketing',
   'Web Design',
@@ -107,39 +119,39 @@ export default function Home() {
         <div className="glow-blob w-[400px] h-[400px] bg-purple-700/20 bottom-[-50px] right-[-100px]" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-24">
-          <div className="max-w-4xl">
-            <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-purple-400 mb-6 font-display fade-in-up">
+          <StaggerGroup viewport={false} className="max-w-4xl">
+            <StaggerItem as="span" className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-purple-400 mb-6 font-display">
               <span className="w-6 h-px bg-purple-500" />
               Digital Marketing Agency — Karachi
-            </span>
-            <h1 className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white leading-[1.08] mb-6 fade-in-up delay-1">
+            </StaggerItem>
+            <StaggerItem as="h1" className="font-display font-bold text-5xl md:text-6xl lg:text-7xl text-white leading-[1.08] mb-6">
               We Don't Just{' '}
               <span className="text-gradient">Market.</span>
               <br />We Make You{' '}
               <span className="text-gradient-purple">Unstoppable.</span>
-            </h1>
-            <p className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-2xl mb-10 fade-in-up delay-2">
+            </StaggerItem>
+            <StaggerItem as="p" className="text-gray-400 text-lg md:text-xl leading-relaxed max-w-2xl mb-10">
               Panther X Vision is a growth-obsessed digital marketing agency that helps ambitious brands dominate their markets through bold strategy, sharp execution, and measurable results.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 fade-in-up delay-3">
+            </StaggerItem>
+            <StaggerItem className="flex flex-col sm:flex-row gap-4">
               <Link to="/contact" className="btn-primary text-base text-center">
                 Get a Free Strategy Call
               </Link>
               <Link to="/services" className="btn-outline text-base text-center">
                 Explore Our Services
               </Link>
-            </div>
+            </StaggerItem>
 
             {/* Stats row */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-10 border-t border-brand-border fade-in-up delay-4">
+            <StaggerItem className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 pt-10 border-t border-brand-border">
               {stats.map(({ number, label }) => (
                 <div key={label}>
                   <div className="font-display font-bold text-3xl text-gradient-purple">{number}</div>
                   <div className="text-gray-400 text-sm mt-1">{label}</div>
                 </div>
               ))}
-            </div>
-          </div>
+            </StaggerItem>
+          </StaggerGroup>
         </div>
 
         {/* Bottom fade */}
@@ -162,25 +174,25 @@ export default function Home() {
       <section className="py-24 relative overflow-hidden">
         <div className="glow-blob w-[500px] h-[500px] bg-purple-900/20 top-0 right-[-150px]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          <SectionHeading
+          <Reveal><SectionHeading
             eyebrow="What We Do"
             title={<>Services Built for <span className="text-gradient-purple">Real Growth</span></>}
             subtitle="From strategy to execution, we offer a full suite of digital marketing services designed to put your brand in front of the right people — and convert them."
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          /></Reveal>
+          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map(({ icon, title, desc }) => (
-              <div key={title} className="bg-brand-card border-glow rounded-xl p-7 card-hover">
+              <StaggerItem key={title} className="bg-brand-card border-glow rounded-xl p-7 card-hover">
                 <div className="w-12 h-12 rounded-lg bg-purple-900/40 border border-purple-800/40 flex items-center justify-center text-purple-400 mb-5">
                   {icon}
                 </div>
                 <h3 className="font-display font-semibold text-white text-lg mb-3">{title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{desc}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
-          <div className="text-center mt-12">
+          </StaggerGroup>
+          <Reveal className="text-center mt-12">
             <Link to="/services" className="btn-outline">View All Services</Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -189,7 +201,7 @@ export default function Home() {
         <div className="glow-blob w-[400px] h-[400px] bg-purple-800/15 bottom-0 left-[-100px]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <Reveal direction="left">
               <SectionHeading
                 eyebrow="Why Panther X Vision"
                 title={<>Marketing That <span className="text-gradient-purple">Moves the Needle</span></>}
@@ -213,9 +225,9 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
             {/* Visual side */}
-            <div className="relative">
+            <Reveal direction="right" className="relative">
               <div className="bg-brand-card border-glow rounded-2xl p-8 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-40 h-40 bg-purple-700/10 rounded-full blur-3xl" />
                 <div className="grid grid-cols-2 gap-5">
@@ -245,7 +257,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -256,15 +268,15 @@ export default function Home() {
       <section className="py-24 relative overflow-hidden">
         <div className="glow-blob w-[500px] h-[300px] bg-purple-900/15 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          <SectionHeading
+          <Reveal><SectionHeading
             eyebrow="Our Process"
             title={<>How We Turn Vision <span className="text-gradient-purple">Into Results</span></>}
             subtitle="A focused 4-step approach that takes your brand from where it is to where it deserves to be."
             center
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          /></Reveal>
+          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {process.map(({ step, desc }, i) => (
-              <div key={step} className="relative bg-brand-card border-glow rounded-xl p-7 card-hover">
+              <StaggerItem key={step} className="relative bg-brand-card border-glow rounded-xl p-7 card-hover">
                 <div className="font-display font-bold text-5xl text-purple-500 mb-4 leading-none">
                   0{i + 1}
                 </div>
@@ -273,16 +285,16 @@ export default function Home() {
                 {i < process.length - 1 && (
                   <div className="hidden lg:block absolute top-10 -right-3 w-6 h-px bg-purple-700/40" />
                 )}
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-24 relative overflow-hidden">
         <div className="glow-blob w-[700px] h-[400px] bg-purple-900/25 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-        <div className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
+        <Reveal className="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
           <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-purple-400 mb-4 font-display">
             Ready to Grow?
           </span>
@@ -300,7 +312,7 @@ export default function Home() {
               See Our Services
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
     </>
   )

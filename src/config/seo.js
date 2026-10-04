@@ -18,7 +18,7 @@ export const publicPages = [
   {
     path: '/services',
     title: 'Digital Marketing Services | Panther X Vision',
-    description: 'Explore social media marketing, SEO, PPC, content, brand strategy, and web design services from Panther X Vision.',
+    description: 'Explore performance marketing, social media, SEO, PPC, content, brand strategy, and web design services from Panther X Vision.',
     changeFrequency: 'monthly',
     priority: 0.9,
   },

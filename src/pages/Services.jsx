@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import Reveal from '../components/motion/Reveal'
+import { StaggerGroup, StaggerItem } from '../components/motion/Stagger'
 const services = [
   {
     icon: <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>,
@@ -20,6 +22,13 @@ const services = [
     tagline: 'Targeted. Measurable. Scalable.',
     desc: 'Get immediate, qualified traffic with our data-driven PPC campaigns on Google Ads and Meta Ads. We manage every aspect — from keyword targeting and ad copywriting to bid optimization and conversion tracking — ensuring maximum ROI on every rupee spent.',
     features: ['Google Search & Display Ads', 'Meta (Facebook/Instagram) Ads', 'Campaign structure & setup', 'A/B ad testing', 'Conversion tracking setup', 'Weekly optimization & reporting'],
+  },
+  {
+    icon: <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M3 20V4"/><path d="M3 20h18"/><path d="M7 15l4-4 3 3 6-8"/><path d="M16 6h4v4"/></svg>,
+    title: 'Performance Marketing',
+    tagline: 'Measure. Optimize. Scale.',
+    desc: 'Turn your advertising budget into measurable business growth with integrated, data-driven campaigns. We connect strategy, creative, media buying, landing pages, and tracking to generate qualified leads and continuously improve return on investment.',
+    features: ['Campaign strategy', 'Meta & Google Ads', 'Audience targeting & retargeting', 'Creative & landing page testing', 'Conversion tracking & analytics', 'ROAS & ROI optimization'],
   },
   {
     icon: <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>,
@@ -50,17 +59,17 @@ export default function Services() {
       {/* Page Hero */}
       <section className="relative pt-36 pb-20 overflow-hidden">
         <div className="glow-blob w-[500px] h-[400px] bg-purple-900/25 top-0 left-1/2 -translate-x-1/2" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-purple-400 mb-4 font-display">
+        <StaggerGroup viewport={false} className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+          <StaggerItem as="span" className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-purple-400 mb-4 font-display">
             Our Services
-          </span>
-          <h1 className="font-display font-bold text-5xl md:text-6xl text-white mb-6 leading-tight">
+          </StaggerItem>
+          <StaggerItem as="h1" className="font-display font-bold text-5xl md:text-6xl text-white mb-6 leading-tight">
             Everything You Need to <span className="text-gradient-purple">Win Online</span>
-          </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          </StaggerItem>
+          <StaggerItem as="p" className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
             A full suite of digital marketing services, each built around a single goal: growing your business with measurable, repeatable results.
-          </p>
-        </div>
+          </StaggerItem>
+        </StaggerGroup>
       </section>
 
       {/* Services Grid */}
@@ -68,8 +77,9 @@ export default function Services() {
         <div className="glow-blob w-[400px] h-[400px] bg-purple-900/15 top-1/3 right-[-100px]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <div className="space-y-8">
-            {services.map(({ icon, title, tagline, desc, features }) => (
-              <div key={title} className="bg-brand-card border-glow rounded-2xl p-8 md:p-10 card-hover">
+            {services.map(({ icon, title, tagline, desc, features }, index) => (
+              <Reveal key={title} delay={(index % 2) * 0.06}>
+                <div className="bg-brand-card border-glow rounded-2xl p-8 md:p-10 card-hover">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                   <div className="lg:col-span-2">
                     <div className="flex items-center gap-4 mb-4">
@@ -95,7 +105,8 @@ export default function Services() {
                     </ul>
                   </div>
                 </div>
-              </div>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -104,7 +115,7 @@ export default function Services() {
       {/* CTA */}
       <section className="py-20 bg-brand-card/40 border-t border-brand-border relative overflow-hidden">
         <div className="glow-blob w-[500px] h-[300px] bg-purple-900/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-        <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
+        <Reveal className="relative z-10 max-w-3xl mx-auto px-6 text-center">
           <h2 className="font-display font-bold text-4xl text-white mb-4">
             Not Sure Which Service You Need?
           </h2>
@@ -112,7 +123,7 @@ export default function Services() {
             Let's talk. A free 30-minute strategy call will help us understand your goals and recommend the right approach.
           </p>
           <Link to="/contact" className="btn-primary text-base">Book a Free Strategy Call</Link>
-        </div>
+        </Reveal>
       </section>
     </>
   )

@@ -1,8 +1,12 @@
 import { useState } from 'react'
+import { AnimatePresence, m } from 'framer-motion'
+import Reveal from '../components/motion/Reveal'
+import { StaggerGroup, StaggerItem } from '../components/motion/Stagger'
 const services = [
   'Social Media Marketing',
   'Search Engine Optimization',
   'Pay-Per-Click Advertising',
+  'Performance Marketing',
   'Content Marketing',
   'Brand Strategy & Identity',
   'Web Design & Development',
@@ -76,17 +80,17 @@ export default function Contact() {
       {/* Page Hero */}
       <section className="relative pt-36 pb-16 overflow-hidden">
         <div className="glow-blob w-[500px] h-[400px] bg-purple-900/25 top-0 left-1/2 -translate-x-1/2" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-purple-400 mb-4 font-display">
+        <StaggerGroup viewport={false} className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+          <StaggerItem as="span" className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-purple-400 mb-4 font-display">
             Get In Touch
-          </span>
-          <h1 className="font-display font-bold text-5xl md:text-6xl text-white mb-6 leading-tight">
+          </StaggerItem>
+          <StaggerItem as="h1" className="font-display font-bold text-5xl md:text-6xl text-white mb-6 leading-tight">
             Let's Start Your <span className="text-gradient-purple">Growth Story</span>
-          </h1>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto leading-relaxed">
+          </StaggerItem>
+          <StaggerItem as="p" className="text-gray-400 text-lg max-w-xl mx-auto leading-relaxed">
             Book a free 30-minute strategy session. No hard sell — just an honest conversation about your goals and how we can help.
-          </p>
-        </div>
+          </StaggerItem>
+        </StaggerGroup>
       </section>
 
       {/* Contact Section */}
@@ -96,7 +100,7 @@ export default function Contact() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
 
             {/* Info panel */}
-            <div className="lg:col-span-2 space-y-8">
+            <Reveal direction="left" className="lg:col-span-2 space-y-8">
               {/* Contact info */}
               <div className="bg-brand-card border-glow rounded-2xl p-8">
                 <h2 className="font-display font-bold text-white text-xl mb-6">Contact Information</h2>
@@ -159,24 +163,25 @@ export default function Contact() {
                   ))}
                 </ul>
               </div>
-            </div>
+            </Reveal>
 
             {/* Form */}
-            <div className="lg:col-span-3">
+            <Reveal direction="right" className="lg:col-span-3">
               <div className="bg-brand-card border-glow rounded-2xl p-8 md:p-10">
                 <h2 className="font-display font-bold text-white text-2xl mb-2">Send Us a Message</h2>
                 <p className="text-gray-500 text-sm mb-8">Fill in your details and we'll get back to you within one business day.</p>
 
+                <AnimatePresence mode="wait" initial={false}>
                 {status === 'success' ? (
-                  <div className="text-center py-16">
+                  <m.div key="success" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-center py-16">
                     <div className="w-16 h-16 rounded-full bg-purple-900/50 border border-purple-600 flex items-center justify-center mx-auto mb-5">
                       <svg className="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
                     <h3 className="font-display font-bold text-white text-xl mb-2">Message Received!</h3>
                     <p className="text-gray-400 text-sm">We'll be in touch within 24 hours to schedule your free strategy call.</p>
-                  </div>
+                  </m.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                  <m.form key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onSubmit={handleSubmit} className="space-y-5">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                       <div>
                         <label htmlFor="name" className={labelCls}>Full Name *</label>
@@ -221,12 +226,14 @@ export default function Contact() {
                         rows={5} placeholder="What are you trying to achieve? What challenges are you facing?"
                         className={inputCls + ' resize-none'} />
                     </div>
+                    <AnimatePresence initial={false}>
                     {status === 'error' && (
-                      <p className="text-red-400 text-sm" role="alert">
+                      <m.p initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-sm" role="alert">
                         {errorMessage} You can also email us directly at{' '}
                         <a className="underline hover:text-red-300" href="mailto:pantherxvision786@gmail.com">pantherxvision786@gmail.com</a>.
-                      </p>
+                      </m.p>
                     )}
+                    </AnimatePresence>
                     <button type="submit" disabled={status === 'sending'}
                       className="btn-primary w-full text-center text-base disabled:opacity-60">
                       {status === 'sending' ? 'Sending...' : 'Send Message & Book Strategy Call'}
@@ -234,10 +241,11 @@ export default function Contact() {
                     <p className="text-gray-600 text-xs text-center">
                       By submitting, you agree to be contacted by Panther X Vision. We never share your information.
                     </p>
-                  </form>
+                  </m.form>
                 )}
+                </AnimatePresence>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>

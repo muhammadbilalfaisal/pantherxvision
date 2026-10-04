@@ -5,6 +5,7 @@ export default function Footer() {
     'Social Media Marketing',
     'Search Engine Optimization',
     'Pay-Per-Click Advertising',
+    'Performance Marketing',
     'Content Marketing',
     'Brand Strategy',
     'Web Design & Development',

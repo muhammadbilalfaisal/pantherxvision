@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import SectionHeading from '../components/SectionHeading'
+import Reveal from '../components/motion/Reveal'
+import { StaggerGroup, StaggerItem } from '../components/motion/Stagger'
 
 const values = [
   {
@@ -34,17 +36,17 @@ export default function About() {
       {/* Page Hero */}
       <section className="relative pt-36 pb-20 overflow-hidden">
         <div className="glow-blob w-[500px] h-[400px] bg-purple-900/25 top-0 left-1/2 -translate-x-1/2" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <span className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-purple-400 mb-4 font-display">
+        <StaggerGroup viewport={false} className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+          <StaggerItem as="span" className="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-purple-400 mb-4 font-display">
             About Us
-          </span>
-          <h1 className="font-display font-bold text-5xl md:text-6xl text-white mb-6 leading-tight">
+          </StaggerItem>
+          <StaggerItem as="h1" className="font-display font-bold text-5xl md:text-6xl text-white mb-6 leading-tight">
             The Agency Built for <span className="text-gradient-purple">Ambitious Brands</span>
-          </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          </StaggerItem>
+          <StaggerItem as="p" className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
             Panther X Vision was founded in Karachi with one mission: to help Pakistani and global businesses compete and win in the digital arena through strategy that actually works.
-          </p>
-        </div>
+          </StaggerItem>
+        </StaggerGroup>
       </section>
 
       {/* Story */}
@@ -52,7 +54,7 @@ export default function About() {
         <div className="glow-blob w-[400px] h-[400px] bg-purple-800/15 top-0 right-[-100px]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <Reveal direction="left">
               <SectionHeading
                 eyebrow="Our Story"
                 title={<>Started With a <span className="text-gradient-purple">Clear Purpose</span></>}
@@ -71,20 +73,20 @@ export default function About() {
               <div className="mt-8">
                 <Link to="/contact" className="btn-primary">Start Your Growth Journey</Link>
               </div>
-            </div>
-            <div className="grid grid-cols-2 gap-5">
+            </Reveal>
+            <StaggerGroup className="grid grid-cols-2 gap-5">
               {[
                 { value: '5+', label: 'Years in Business' },
                 { value: '50+', label: 'Happy Clients' },
                 { value: '200+', label: 'Campaigns Run' },
                 { value: '15+', label: 'Industries Served' },
               ].map(({ value, label }) => (
-                <div key={label} className="bg-brand-card border-glow rounded-xl p-7 text-center card-hover">
+                <StaggerItem key={label} className="bg-brand-card border-glow rounded-xl p-7 text-center card-hover">
                   <div className="font-display font-bold text-4xl text-gradient-purple mb-2">{value}</div>
                   <div className="text-gray-400 text-sm">{label}</div>
-                </div>
+                </StaggerItem>
               ))}
-            </div>
+            </StaggerGroup>
           </div>
         </div>
       </section>
@@ -92,22 +94,22 @@ export default function About() {
       {/* Values */}
       <section className="py-20 bg-brand-card/40 border-y border-brand-border">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <SectionHeading
+          <Reveal><SectionHeading
             eyebrow="Our Values"
             title={<>What Drives <span className="text-gradient-purple">Everything We Do</span></>}
             center
-          />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          /></Reveal>
+          <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map(({ icon, title, desc }) => (
-              <div key={title} className="bg-brand-card border-glow rounded-xl p-7 card-hover text-center">
+              <StaggerItem key={title} className="bg-brand-card border-glow rounded-xl p-7 card-hover text-center">
                 <div className="w-12 h-12 rounded-lg bg-purple-900/40 border border-purple-800/40 flex items-center justify-center text-purple-400 mb-5 mx-auto">
                   {icon}
                 </div>
                 <h3 className="font-display font-semibold text-white text-base mb-3">{title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{desc}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
@@ -115,13 +117,13 @@ export default function About() {
       <section className="py-20 relative overflow-hidden">
         <div className="glow-blob w-[400px] h-[400px] bg-purple-900/15 bottom-0 left-[-100px]" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          <SectionHeading
+          <Reveal><SectionHeading
             eyebrow="Our Team"
             title={<>The Minds Behind <span className="text-gradient-purple">Your Growth</span></>}
             subtitle="A tight-knit team of strategists, creatives, and data nerds obsessed with getting you results."
             center
-          />
-          <div className="max-w-xs mx-auto">
+          /></Reveal>
+          <Reveal className="max-w-xs mx-auto">
             {team.map(({ name, role, initial }) => (
               <div key={name} className="bg-brand-card border-glow rounded-xl p-7 text-center card-hover">
                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-purple-700 to-purple-900 flex items-center justify-center font-display font-bold text-2xl text-white mx-auto mb-5">
@@ -131,19 +133,19 @@ export default function About() {
                 <p className="text-purple-400 text-sm">{role}</p>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-20 bg-brand-card/40 border-t border-brand-border">
-        <div className="max-w-3xl mx-auto px-6 text-center">
+        <Reveal className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="font-display font-bold text-4xl text-white mb-4">
             Ready to Work With Us?
           </h2>
           <p className="text-gray-400 mb-8">Let's talk about your goals and map out how we can help you get there.</p>
           <Link to="/contact" className="btn-primary text-base">Book a Free Consultation</Link>
-        </div>
+        </Reveal>
       </section>
     </>
   )
