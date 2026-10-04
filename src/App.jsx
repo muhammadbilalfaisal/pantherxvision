@@ -11,6 +11,7 @@ import NotFound from './pages/NotFound'
 import { pageMetadata, publicPages, SITE_URL } from './config/seo'
 import MotionProvider from './components/motion/MotionProvider'
 import PageTransition from './components/motion/PageTransition'
+import AdminReviews from './admin/AdminReviews'
 
 const pageComponents = {
   '/': <Home />,
@@ -34,10 +35,13 @@ function PageMetadata() {
 
   useEffect(() => {
     const isPublicPage = Boolean(pageMetadata[pathname])
-    const metadata = pageMetadata[pathname] ?? {
+    const metadata = pageMetadata[pathname] ?? (pathname.startsWith('/admin/') ? {
+      title: 'Reviews Admin | Panther X Vision',
+      description: 'Protected Panther X Vision review moderation dashboard.',
+    } : {
       title: 'Page Not Found | Panther X Vision',
       description: 'The requested Panther X Vision page could not be found.',
-    }
+    })
     const canonicalUrl = `${SITE_URL}${pathname === '/' ? '' : pathname}`
 
     document.title = metadata.title
@@ -86,9 +90,31 @@ function AnimatedRoutes() {
         {publicPages.map(({ path }) => (
           <Route key={path} path={path} element={<PageTransition>{pageComponents[path]}</PageTransition>} />
         ))}
+        <Route path="/admin/reviews/*" element={<AdminReviews />} />
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
       </Routes>
     </AnimatePresence>
+  )
+}
+
+function ApplicationFrame() {
+  const { pathname } = useLocation()
+  const isAdmin = pathname.startsWith('/admin/')
+
+  return (
+    <>
+      <ScrollToTop />
+      <PageMetadata />
+      {isAdmin ? (
+        <main id="main-content"><AnimatedRoutes /></main>
+      ) : (
+        <div className="min-h-screen flex flex-col bg-brand-dark">
+          <Navbar />
+          <main id="main-content" className="flex-1"><AnimatedRoutes /></main>
+          <Footer />
+        </div>
+      )}
+    </>
   )
 }
 
@@ -96,15 +122,7 @@ export default function App() {
   return (
     <MotionProvider>
       <BrowserRouter>
-        <ScrollToTop />
-        <PageMetadata />
-        <div className="min-h-screen flex flex-col bg-brand-dark">
-          <Navbar />
-          <main id="main-content" className="flex-1">
-            <AnimatedRoutes />
-          </main>
-          <Footer />
-        </div>
+        <ApplicationFrame />
       </BrowserRouter>
     </MotionProvider>
   )

@@ -48,26 +48,24 @@ Create `.env.local` from `.env.example` and configure:
 | `SUPABASE_URL` | Yes for client reviews | Supabase project URL; server-only Netlify variable |
 | `SUPABASE_SERVICE_ROLE_KEY` | Yes for client reviews | Supabase service-role key; server-only and never exposed to Vite |
 | `REVIEW_RATE_LIMIT_SALT` | Recommended | Long random server-only value used to hash rate-limit identifiers |
+| `ADMIN_EMAILS` | Yes for review moderation | Comma-separated Supabase Auth emails authorized as administrators; server-only |
 
 Vite exposes `VITE_` variables to browser code. Do not place secrets in them. A Formspree form endpoint is a public client-side identifier, not an API secret.
 
 ### Client reviews setup
 
-The review UI reads and submits through `/.netlify/functions/reviews`. Supabase stores submissions and acts as the private moderation interface.
+The public review UI reads and submits through `/.netlify/functions/reviews`. The protected `/admin/reviews` dashboard moderates submissions through a separate server-side function.
 
 1. Create a Supabase project.
 2. Open its SQL Editor and run `supabase/migrations/202610040001_create_reviews.sql`.
-3. Add `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and a long random `REVIEW_RATE_LIMIT_SALT` to Netlify environment variables.
-4. Redeploy the site so the function receives the new variables.
+3. Run `supabase/migrations/202610040002_admin_review_moderation.sql` after the base migration.
+4. Create the administrator in Supabase Authentication using email/password.
+5. Add `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `ADMIN_EMAILS`, and a long random `REVIEW_RATE_LIMIT_SALT` to Netlify environment variables. `ADMIN_EMAILS` must contain the authenticated administrator's email address.
+6. Redeploy the site so the functions receive the new variables.
 
-New submissions are always inserted with `status = pending` and `is_verified = false`. To moderate a review, use the private Supabase Table Editor:
+New submissions are always inserted with `status = pending` and `is_verified = false`. Authorized administrators can sign in at `/admin/reviews` to approve, reject, restore, verify, search, filter, paginate, and delete reviews.
 
-- Approve: set `status` to `approved` and `approved_at` to the current timestamp.
-- Reject: set `status` to `rejected`.
-- Verify: set `is_verified` only after confirming the client relationship.
-- Delete: remove the row in the Table Editor.
-
-The public API only returns approved reviews and never selects the email column. There is intentionally no public approval endpoint. Avatar uploads are not enabled because the project has no existing managed-upload architecture; the schema includes `avatar_url` for a future trusted admin workflow.
+The public API only returns approved reviews and never selects the email column. Moderation requests require a valid Supabase Auth session plus membership in the server-only `ADMIN_EMAILS` allowlist. The service-role key remains inside Netlify Functions. Avatar uploads are not enabled because the project has no existing managed-upload architecture; the schema includes `avatar_url` for a future trusted admin workflow.
 
 ## Available scripts
 
