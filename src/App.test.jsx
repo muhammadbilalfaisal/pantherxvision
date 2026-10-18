@@ -11,7 +11,7 @@ describe('application routing', () => {
   it('renders the home page', () => {
     render(<App />)
     expect(screen.getByRole('heading', { level: 1, name: /we don't just market/i })).toBeInTheDocument()
-    expect(document.title).toBe('Panther X Vision | Digital Marketing Agency in Karachi')
+    expect(document.title).toBe('Panther X Vision | Digital Marketing Agency Based in Pakistan')
     expect(document.querySelector('link[rel="canonical"]')).toHaveAttribute('href', 'https://pantherxvision.com')
     expect(document.querySelector('meta[name="robots"]')).toHaveAttribute('content', 'index, follow')
   })

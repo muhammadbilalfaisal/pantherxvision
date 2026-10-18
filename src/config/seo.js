@@ -3,7 +3,7 @@ export const SITE_URL = 'https://pantherxvision.com'
 export const publicPages = [
   {
     path: '/',
-    title: 'Panther X Vision | Digital Marketing Agency in Karachi',
+    title: 'Panther X Vision | Digital Marketing Agency Based in Pakistan',
     description: 'Growth-driven digital marketing, SEO, paid advertising, branding, and web design for ambitious businesses in Karachi and beyond.',
     changeFrequency: 'weekly',
     priority: 1,
