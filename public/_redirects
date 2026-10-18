@@ -1,1 +1,6 @@
-/*    /index.html   200
+/about             /about/index.html             200
+/services          /services/index.html          200
+/contact           /contact/index.html           200
+/admin/reviews     /admin/reviews/index.html     200
+/admin/reviews/*   /admin/reviews/index.html     200
+/*                 /404.html                     404
