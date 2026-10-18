@@ -2,7 +2,7 @@ const starValues = [1, 2, 3, 4, 5]
 
 export function RatingDisplay({ rating, size = 'text-base' }) {
   return (
-    <span className={`inline-flex gap-0.5 text-amber-400 ${size}`} aria-label={`${rating} out of 5 stars`}>
+    <span className={`inline-flex gap-0.5 text-amber-400 ${size}`} role="img" aria-label={`${rating} out of 5 stars`}>
       {starValues.map(value => (
         <span key={value} aria-hidden="true">{value <= Math.round(rating) ? '★' : '☆'}</span>
       ))}

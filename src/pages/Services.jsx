@@ -122,7 +122,7 @@ export default function Services() {
           <p className="text-gray-400 mb-8 text-lg">
             Let's talk. A free 30-minute strategy call will help us understand your goals and recommend the right approach.
           </p>
-          <Link to="/contact" className="btn-primary text-base">Book a Free Strategy Call</Link>
+          <Link to="/contact/" className="btn-primary text-base">Book a Free Strategy Call</Link>
         </Reveal>
       </section>
     </>

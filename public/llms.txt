@@ -5,9 +5,9 @@
 ## Primary pages
 
 - [Home](https://pantherxvision.com/): Agency overview, capabilities, process, and client reviews.
-- [Services](https://pantherxvision.com/services): Complete description of Panther X Vision's digital marketing services.
-- [About](https://pantherxvision.com/about): Agency background, values, and team information.
-- [Contact](https://pantherxvision.com/contact): Contact details and strategy-call enquiry form.
+- [Services](https://pantherxvision.com/services/): Complete description of Panther X Vision's digital marketing services.
+- [About](https://pantherxvision.com/about/): Agency background, values, and team information.
+- [Contact](https://pantherxvision.com/contact/): Contact details and strategy-call enquiry form.
 
 ## Services
 

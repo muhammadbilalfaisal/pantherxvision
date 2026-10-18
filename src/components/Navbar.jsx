@@ -23,9 +23,9 @@ export default function Navbar() {
 
   const links = [
     { to: '/', label: 'Home' },
-    { to: '/about', label: 'About' },
-    { to: '/services', label: 'Services' },
-    { to: '/contact', label: 'Contact' },
+    { to: '/about/', label: 'About' },
+    { to: '/services/', label: 'Services' },
+    { to: '/contact/', label: 'Contact' },
   ]
 
   return (
@@ -38,7 +38,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
-            <img src="/logo.png" alt="Panther X Vision" className="h-14 w-auto" width="1000" height="500" />
+            <img src="/logo-192.webp" srcSet="/logo-192.webp 192w, /logo-384.webp 384w" sizes="112px" alt="Panther X Vision" className="h-14 w-auto" width="384" height="192" />
           </Link>
 
           {/* Desktop nav */}
@@ -62,7 +62,7 @@ export default function Navbar() {
 
           {/* CTA */}
           <div className="hidden md:block">
-            <Link to="/contact" className="btn-primary text-sm">
+            <Link to="/contact/" className="btn-primary text-sm">
               Book a Meeting
             </Link>
           </div>
@@ -95,7 +95,7 @@ export default function Navbar() {
               </Link>
             ))}
             <div className="px-4 pt-3">
-              <Link to="/contact" onClick={() => setOpen(false)} className="btn-primary text-sm w-full text-center block">
+              <Link to="/contact/" onClick={() => setOpen(false)} className="btn-primary text-sm w-full text-center block">
                 Book a Meeting
               </Link>
             </div>

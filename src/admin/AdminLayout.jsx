@@ -5,7 +5,7 @@ export default function AdminLayout({ user, onLogout, children }) {
     <div className="min-h-screen bg-brand-dark md:grid md:grid-cols-[240px_1fr]">
       <aside className="flex flex-col border-b md:border-b-0 md:border-r border-brand-border bg-brand-card/60 p-5 md:min-h-screen">
         <Link to="/" className="inline-flex items-center" aria-label="Panther X Vision home">
-          <img src="/logo.png" alt="" className="h-12 w-auto" width="1000" height="500" />
+          <img src="/logo-192.webp" srcSet="/logo-192.webp 192w, /logo-384.webp 384w" sizes="96px" alt="" className="h-12 w-auto" width="384" height="192" />
         </Link>
         <div className="mt-6 text-xs font-display uppercase tracking-[0.18em] text-gray-500">Admin</div>
         <nav className="mt-3" aria-label="Admin navigation">

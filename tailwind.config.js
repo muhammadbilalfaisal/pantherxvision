@@ -14,8 +14,8 @@ export default {
         },
       },
       fontFamily: {
-        display: ['Space Grotesk', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        display: ['Space Grotesk Variable', 'sans-serif'],
+        body: ['Inter Variable', 'sans-serif'],
       },
       backgroundImage: {
         'purple-glow': 'radial-gradient(ellipse at 50% 0%, rgba(123,47,190,0.25) 0%, transparent 60%)',

@@ -10,7 +10,7 @@ export function StatusBadge({ status }) {
 }
 
 export function Rating({ value }) {
-  return <span className="text-amber-300" aria-label={`${value} out of 5 stars`}>{'★'.repeat(value)}<span className="text-gray-700">{'★'.repeat(5 - value)}</span></span>
+  return <span className="text-amber-300" role="img" aria-label={`${value} out of 5 stars`}>{'★'.repeat(value)}<span className="text-gray-700">{'★'.repeat(5 - value)}</span></span>
 }
 
 export default function ReviewDetailModal({ review, busy, onAction, onClose }) {

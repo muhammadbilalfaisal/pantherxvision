@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import SectionHeading from '../SectionHeading'
 import ReviewCard from './ReviewCard'
-import ReviewModal from './ReviewModal'
 import { RatingDisplay } from './RatingStars'
 import Reveal from '../motion/Reveal'
 import { StaggerGroup, StaggerItem } from '../motion/Stagger'
+
+const ReviewModal = lazy(() => import('./ReviewModal'))
 
 export default function ReviewSection() {
   const [reviews, setReviews] = useState([])
@@ -13,10 +14,30 @@ export default function ReviewSection() {
   const [loadingMore, setLoadingMore] = useState(false)
   const [loadError, setLoadError] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
+  const [shouldLoad, setShouldLoad] = useState(false)
+  const sectionRef = useRef(null)
   const triggerRef = useRef(null)
   const closeModal = useCallback(() => setModalOpen(false), [])
 
   useEffect(() => {
+    if (!('IntersectionObserver' in window)) {
+      queueMicrotask(() => setShouldLoad(true))
+      return undefined
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setShouldLoad(true)
+        observer.disconnect()
+      }
+    }, { rootMargin: '600px 0px' })
+
+    observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!shouldLoad) return undefined
     const controller = new AbortController()
     fetch('/.netlify/functions/reviews?limit=6', { signal: controller.signal })
       .then(response => {
@@ -32,7 +53,7 @@ export default function ReviewSection() {
       })
       .finally(() => setLoading(false))
     return () => controller.abort()
-  }, [])
+  }, [shouldLoad])
 
   const loadMore = async () => {
     setLoadingMore(true)
@@ -50,7 +71,7 @@ export default function ReviewSection() {
   }
 
   return (
-    <section className="py-24 relative overflow-hidden" aria-labelledby="client-reviews-heading">
+    <section ref={sectionRef} className="py-24 relative overflow-hidden" aria-labelledby="client-reviews-heading">
       <div className="glow-blob w-[450px] h-[450px] bg-purple-900/15 top-0 right-[-120px]" />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         <Reveal className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
@@ -104,7 +125,11 @@ export default function ReviewSection() {
           </div>
         )}
       </div>
-      <ReviewModal open={modalOpen} onClose={closeModal} triggerRef={triggerRef} />
+      {modalOpen && (
+        <Suspense fallback={null}>
+          <ReviewModal open={modalOpen} onClose={closeModal} triggerRef={triggerRef} />
+        </Suspense>
+      )}
     </section>
   )
 }

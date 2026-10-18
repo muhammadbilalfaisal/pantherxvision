@@ -1,23 +1,24 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/Home'
-import About from './pages/About'
-import Services from './pages/Services'
-import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 import { pageMetadata, publicPages, SITE_URL } from './config/seo'
 import MotionProvider from './components/motion/MotionProvider'
 import PageTransition from './components/motion/PageTransition'
-import AdminReviews from './admin/AdminReviews'
+
+const About = lazy(() => import('./pages/About'))
+const Services = lazy(() => import('./pages/Services'))
+const Contact = lazy(() => import('./pages/Contact'))
+const AdminReviews = lazy(() => import('./admin/AdminReviews'))
 
 const pageComponents = {
   '/': <Home />,
-  '/about': <About />,
-  '/services': <Services />,
-  '/contact': <Contact />,
+  '/about/': <About />,
+  '/services/': <Services />,
+  '/contact/': <Contact />,
 }
 
 function updateMeta(name, content, attribute = 'name') {
@@ -34,15 +35,16 @@ function PageMetadata() {
   const { pathname } = useLocation()
 
   useEffect(() => {
-    const isPublicPage = Boolean(pageMetadata[pathname])
-    const metadata = pageMetadata[pathname] ?? (pathname.startsWith('/admin/') ? {
+    const normalizedPathname = pathname === '/' ? '/' : `${pathname.replace(/\/+$/, '')}/`
+    const isPublicPage = Boolean(pageMetadata[normalizedPathname])
+    const metadata = pageMetadata[normalizedPathname] ?? (pathname.startsWith('/admin/') ? {
       title: 'Reviews Admin | Panther X Vision',
       description: 'Protected Panther X Vision review moderation dashboard.',
     } : {
       title: 'Page Not Found | Panther X Vision',
       description: 'The requested Panther X Vision page could not be found.',
     })
-    const canonicalUrl = `${SITE_URL}${pathname === '/' ? '' : pathname}`
+    const canonicalUrl = `${SITE_URL}${normalizedPathname === '/' ? '' : normalizedPathname}`
 
     document.title = metadata.title
     updateMeta('description', metadata.description)
@@ -85,15 +87,17 @@ function AnimatedRoutes() {
   const location = useLocation()
 
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <Routes location={location} key={location.pathname}>
-        {publicPages.map(({ path }) => (
-          <Route key={path} path={path} element={<PageTransition>{pageComponents[path]}</PageTransition>} />
-        ))}
-        <Route path="/admin/reviews/*" element={<AdminReviews />} />
-        <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
-      </Routes>
-    </AnimatePresence>
+    <Suspense fallback={<div className="min-h-screen bg-brand-dark" aria-label="Loading page" />}>
+      <AnimatePresence mode="wait" initial={false}>
+        <Routes location={location} key={location.pathname}>
+          {publicPages.map(({ path }) => (
+            <Route key={path} path={path} element={<PageTransition>{pageComponents[path]}</PageTransition>} />
+          ))}
+          <Route path="/admin/reviews/*" element={<AdminReviews />} />
+          <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+        </Routes>
+      </AnimatePresence>
+    </Suspense>
   )
 }
 

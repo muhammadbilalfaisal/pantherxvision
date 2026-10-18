@@ -71,7 +71,7 @@ export default function About() {
                 </p>
               </div>
               <div className="mt-8">
-                <Link to="/contact" className="btn-primary">Start Your Growth Journey</Link>
+                <Link to="/contact/" className="btn-primary">Start Your Growth Journey</Link>
               </div>
             </Reveal>
             <StaggerGroup className="grid grid-cols-2 gap-5">
@@ -144,7 +144,7 @@ export default function About() {
             Ready to Work With Us?
           </h2>
           <p className="text-gray-400 mb-8">Let's talk about your goals and map out how we can help you get there.</p>
-          <Link to="/contact" className="btn-primary text-base">Book a Free Consultation</Link>
+          <Link to="/contact/" className="btn-primary text-base">Book a Free Consultation</Link>
         </Reveal>
       </section>
     </>

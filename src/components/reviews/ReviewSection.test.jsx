@@ -47,7 +47,7 @@ describe('ReviewSection', () => {
     render(<ReviewSection />)
     const trigger = await screen.findByRole('button', { name: /share your experience/i })
     fireEvent.click(trigger)
-    fireEvent.click(screen.getByRole('button', { name: /submit review/i }))
+    fireEvent.click(await screen.findByRole('button', { name: /submit review/i }))
     expect(screen.getByText(/choose a rating/i)).toBeInTheDocument()
     expect(screen.getByText(/your name is required/i)).toBeInTheDocument()
     expect(screen.getByText(/your review is required/i)).toBeInTheDocument()

@@ -27,7 +27,7 @@ export default function AdminLogin({ onLogin }) {
   return (
     <div className="min-h-screen bg-brand-dark flex items-center justify-center p-5">
       <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-md rounded-2xl bg-brand-card border-glow p-7 sm:p-9">
-        <img src="/logo.png" alt="Panther X Vision" className="h-14 w-auto mb-7" width="1000" height="500" />
+        <img src="/logo-192.webp" srcSet="/logo-192.webp 192w, /logo-384.webp 384w" sizes="112px" alt="Panther X Vision" className="h-14 w-auto mb-7" width="384" height="192" />
         <h1 className="font-display text-3xl font-bold text-white">Admin sign in</h1>
         <p className="mt-2 text-sm text-gray-400">Sign in with an authorized Panther X Vision admin account.</p>
         <form onSubmit={submit} className="mt-7 space-y-5">

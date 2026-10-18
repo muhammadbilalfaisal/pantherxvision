@@ -134,10 +134,10 @@ export default function Home() {
               Panther X Vision is a growth-obsessed digital marketing agency that helps ambitious brands dominate their markets through bold strategy, sharp execution, and measurable results.
             </StaggerItem>
             <StaggerItem className="flex flex-col sm:flex-row gap-4">
-              <Link to="/contact" className="btn-primary text-base text-center">
+              <Link to="/contact/" className="btn-primary text-base text-center">
                 Get a Free Strategy Call
               </Link>
-              <Link to="/services" className="btn-outline text-base text-center">
+              <Link to="/services/" className="btn-outline text-base text-center">
                 Explore Our Services
               </Link>
             </StaggerItem>
@@ -191,7 +191,7 @@ export default function Home() {
             ))}
           </StaggerGroup>
           <Reveal className="text-center mt-12">
-            <Link to="/services" className="btn-outline">View All Services</Link>
+            <Link to="/services/" className="btn-outline">View All Services</Link>
           </Reveal>
         </div>
       </section>
@@ -305,10 +305,10 @@ export default function Home() {
             Book a free 30-minute strategy session. We'll audit your current digital presence and map out exactly how to accelerate your growth.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact" className="btn-primary text-base">
+            <Link to="/contact/" className="btn-primary text-base">
               Book Your Free Strategy Call
             </Link>
-            <Link to="/services" className="btn-outline text-base">
+            <Link to="/services/" className="btn-outline text-base">
               See Our Services
             </Link>
           </div>

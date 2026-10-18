@@ -13,9 +13,9 @@ export default function Footer() {
 
   const links = [
     { to: '/', label: 'Home' },
-    { to: '/about', label: 'About Us' },
-    { to: '/services', label: 'Services' },
-    { to: '/contact', label: 'Contact' },
+    { to: '/about/', label: 'About Us' },
+    { to: '/services/', label: 'Services' },
+    { to: '/contact/', label: 'Contact' },
   ]
 
   return (
@@ -24,7 +24,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <img src="/logo.png" alt="Panther X Vision" className="h-16 w-auto mb-4" width="1000" height="500" loading="lazy" />
+            <img src="/logo-192.webp" srcSet="/logo-192.webp 192w, /logo-384.webp 384w" sizes="128px" alt="Panther X Vision" className="h-16 w-auto mb-4" width="384" height="192" loading="lazy" />
             <p className="text-gray-400 text-sm leading-relaxed mt-4">
               A growth-driven digital marketing agency helping businesses dominate their market through bold strategy and measurable results.
             </p>
@@ -64,7 +64,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {services.map(s => (
                 <li key={s}>
-                  <Link to="/services" className="text-gray-400 text-sm hover:text-purple-400 transition-colors">
+                  <Link to="/services/" className="text-gray-400 text-sm hover:text-purple-400 transition-colors">
                     {s}
                   </Link>
                 </li>
