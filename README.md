@@ -8,6 +8,7 @@ The public marketing website for Panther X Vision, a growth-driven digital marke
 - Accessible navigation and labelled contact form
 - Formspree-powered contact submissions
 - Route-specific titles, descriptions, and canonical metadata
+- XML sitemap, crawler policy, and `llms.txt` AI discovery summary
 - Reduced-motion support
 - Netlify SPA routing and deployment configuration
 - Automated lint, test, and production-build checks
@@ -84,6 +85,8 @@ The public API only returns approved reviews and never selects the email column.
 
 ```text
 public/                 Static brand assets
+  robots.txt            Search and AI crawler access policy
+  llms.txt              AI-readable site and service summary
 src/
   components/           Shared navigation, footer, and headings
   pages/                Route-level page components
